@@ -12,7 +12,11 @@ const http = createServer(app);
 
 createRoutes(app);
 
-const PORT: number = process.env.PORT ? Number(process.env.PORT) : 3003;
+const PORT: number | string = process.env.PORT || 3003;
+
+app.use("*", (req, res) => {
+    res.send("<h1>Welcome to the todo server!</h1>");
+});
 
 http.listen(PORT, () => {
     console.log(`The server is running on the port : ${PORT}`);
