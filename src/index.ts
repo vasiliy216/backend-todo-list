@@ -5,12 +5,13 @@ import { createServer } from 'http';
 dotenv.config();
 
 import './core/db'
-import createRoutes from './core/routes'
+import { CreateRoutes, CreateSocket } from './core/index'
 
 const app = express();
 const http = createServer(app);
+const io = CreateSocket(http)
 
-createRoutes(app);
+CreateRoutes(app, io);
 
 const PORT: number | string = process.env.PORT || 3003;
 
