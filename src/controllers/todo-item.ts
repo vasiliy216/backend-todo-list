@@ -76,7 +76,11 @@ export default class TodoItemController {
 
                 console.log(item._id)
 
-                this.io.emit("SERVER:ITEM_UPDATE", item._id);
+                this.io.on("connection", (socket) => {
+                    socket.broadcast.emit("SERVER:ITEM_UPDATE", item._id)
+                })
+
+                // this.io.emit("SERVER:ITEM_UPDATE", item._id);
 
             })
     };
