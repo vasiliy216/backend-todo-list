@@ -5,7 +5,7 @@ export default (http: http.Server) => {
 
     const io = new socket.Server(http, {
         cors: {
-            origin: "https://backend-todo-list-web-mob.herokuapp.com",
+            origin: "*",
             methods: ["GET", "POST"]
         }
     });
