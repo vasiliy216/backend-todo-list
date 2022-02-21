@@ -22,8 +22,6 @@ export default class TodoItemController {
             .save()
             .then((data: ITodoItem) => {
                 res.json(data)
-
-                this.io.emit("SERVER:ITEM_CREATE", data);
             })
             .catch((err: any) => {
                 return res.status(404).json({
@@ -44,8 +42,6 @@ export default class TodoItemController {
                     res.json({
                         message: 'The task element has been deleted.'
                     })
-
-                    this.io.emit("SERVER:ITEM_DELETE", item._id);
                 }
             })
             .catch(() => {
@@ -73,15 +69,6 @@ export default class TodoItemController {
                 res.status(200).json({
                     item
                 })
-
-                console.log(item._id)
-
-                this.io.on("connection", (socket) => {
-                    socket.broadcast.emit("SERVER:ITEM_UPDATE", item._id)
-                })
-
-                // this.io.emit("SERVER:ITEM_UPDATE", item._id);
-
             })
     };
 

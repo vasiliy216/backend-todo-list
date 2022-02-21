@@ -13,6 +13,10 @@ export default (http: http.Server) => {
     io.on("connect", function (socket: any) {
         console.log("Connect is successful")
         io.emit('message', "Connect is successful")
+
+        socket.on("SERVER:ITEM_UPDATE", (obj: any) => {
+            socket.broadcast.emit("SERVER:ITEM_UPDATE", obj);
+        })
     })
 
     return io;
